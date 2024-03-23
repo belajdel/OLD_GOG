@@ -25,7 +25,7 @@ jobs:
 
       - name: Start Flask app
         run: |
-          python main.py &  # Start the Flask app in the background
+          python app.py &  # Start the Flask app in the background
           sleep 5  # Wait for the app to start
 
           # Install and set up ngrok
