@@ -33,7 +33,7 @@ jobs:
           unzip ngrok-stable-linux-amd64.zip
 
           # Set ngrok auth token
-          ./ngrok config  add-authtoken 2P1VicjMbdrg4uhgYzrZgIPh5IR_6oHHzgDzbWTnhDi6s6fq3
+          ./ngrok  authtoken 2P1VicjMbdrg4uhgYzrZgIPh5IR_6oHHzgDzbWTnhDi6s6fq3
 
           # Expose the Flask app's port using ngrok
           ./ngrok http 5000  # Replace 5000 with the port your Flask app is running on
