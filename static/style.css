@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game Downloads</title>
+    <style>
+        .game-widget {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .game-icon {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+        }
+        .game-details {
+            flex-grow: 1;
+        }
+        .game-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .download-link {
+            display: block;
+            margin-top: 10px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <h1>Game Downloads</h1>
+    {% for game in games %}
+        <div class="game-widget">
+            <img class="game-icon" src="{{ game.icon }}" alt="Game Icon">
+            <div class="game-details">
+                <h2 class="game-name">{{ game.name }}</h2>
+                <a class="download-link" href="{{ game.link }}">Download</a>
+            </div>
+        </div>
+    {% endfor %}
+</body>
+</html>
