@@ -10,11 +10,14 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             margin-bottom: 10px;
+            animation: fade-in 0.5s ease-in-out;
         }
         .game-icon {
             width: 80px;
             height: 80px;
             margin-right: 10px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .game-details {
             flex-grow: 1;
@@ -25,14 +28,46 @@
             margin-bottom: 5px;
         }
         .download-link {
-            display: block;
-            margin-top: 10px;
-            text-align: right;
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .download-link:hover {
+            background-color: #0056b3;
+        }
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .search-container {
+            margin-top: 20px;
+        }
+        .search-input {
+            width: 300px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
     <h1>Game Downloads</h1>
+
+    <div class="search-container">
+        <input class="search-input" type="text" id="search" placeholder="Search...">
+    </div>
+
     {% for game in games %}
         <div class="game-widget">
             <img class="game-icon" src="{{ game.icon }}" alt="Game Icon">
@@ -42,5 +77,22 @@
             </div>
         </div>
     {% endfor %}
+
+    <script>
+        const searchInput = document.getElementById("search");
+        searchInput.addEventListener("input", function() {
+            const searchValue = this.value.toLowerCase();
+            const gameWidgets = document.querySelectorAll(".game-widget");
+
+            gameWidgets.forEach(function(widget) {
+                const gameName = widget.querySelector(".game-name").textContent.toLowerCase();
+                if (gameName.includes(searchValue)) {
+                    widget.style.display = "flex";
+                } else {
+                    widget.style.display = "none";
+                }
+            });
+        });
+    </script>
 </body>
 </html>

@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Game Downloads</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <style>
         .game-widget {
             display: flex;
@@ -10,11 +11,14 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             margin-bottom: 10px;
+            animation: fade-in 0.5s ease-in-out;
         }
         .game-icon {
             width: 80px;
             height: 80px;
             margin-right: 10px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .game-details {
             flex-grow: 1;
@@ -25,22 +29,55 @@
             margin-bottom: 5px;
         }
         .download-link {
-            display: block;
-            margin-top: 10px;
-            text-align: right;
+            display: inline-block;
+            padding: 8px 16px;
+        }
+        .search-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .search-input {
+            width: 300px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
     <h1>Game Downloads</h1>
+
+    <div class="search-container">
+        <input class="search-input form-control" type="text" id="search" placeholder="Search...">
+    </div>
+
     {% for game in games %}
         <div class="game-widget">
             <img class="game-icon" src="{{ game.icon }}" alt="Game Icon">
             <div class="game-details">
                 <h2 class="game-name">{{ game.name }}</h2>
-                <a class="download-link" href="{{ game.link }}">Download</a>
+                <a class="download-link btn btn-primary" href="{{ game.link }}">Download</a>
             </div>
         </div>
     {% endfor %}
+
+    <script>
+        const searchInput = document.getElementById("search");
+        searchInput.addEventListener("input", function() {
+            const searchValue = this.value.toLowerCase();
+            const gameWidgets = document.querySelectorAll(".game-widget");
+
+            gameWidgets.forEach(function(widget) {
+                const gameName = widget.querySelector(".game-name").textContent.toLowerCase();
+                if (gameName.includes(searchValue)) {
+                    widget.style.display = "flex";
+                } else {
+                    widget.style.display = "none";
+                }
+            });
+        });
+    </script>
 </body>
 </html>
